@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block title %} Quiz and Fun {% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-4">Welcome to Quiz and Fun</h1>
+
+<a class="btn btn-primary" href="{% url 'quiz_create' %}">Create a Quiz</a>
+
+<div class="container row gap-3 mt-4">
+  {% for quiz in quizes %}
+  <div class="card" style="width: 18rem;">
+    {% if quiz.photo %}
+    <img src="{{ quiz.photo.url }}" class="card-img-top" alt="Quiz image" />
+    {% endif %}
+    <div class="card-body">
+      <h5 class="card-title">{{ quiz.user.username }}</h5>
+      <p class="card-text">{{ quiz.text }}</p>
+      <a href="{% url 'quiz_edit' quiz.id %}" class="btn btn-primary">Edit</a>
+      <a href="{% url 'quiz_delete' quiz.id %}" class="btn btn-danger">Delete</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
